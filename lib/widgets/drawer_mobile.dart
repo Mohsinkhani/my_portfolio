@@ -25,7 +25,7 @@ class DrawerMobile extends StatelessWidget {
           ),
           for (int i = 0; i < navIcons.length; i++)
             ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 30),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 30),
               titleTextStyle: TextStyle(
                   fontSize: 16,
                   color: CustomColor.whitePrimary,

@@ -6,6 +6,7 @@ import 'package:myportfolio/widgets/site_logo.dart';
 
 class HeaderDesktop extends StatelessWidget {
   const HeaderDesktop({super.key, required this.onNavMenuTap});
+
   final Function(int) onNavMenuTap;
 
   @override
@@ -36,7 +37,7 @@ class HeaderDesktop extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   )),
-            )
+            ),
         ],
       ),
     );

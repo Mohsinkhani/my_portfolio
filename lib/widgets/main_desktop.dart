@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:myportfolio/constants/colors.dart';
 
 class MainDesktop extends StatelessWidget {
   const MainDesktop({super.key});
+
+  void _launchEmail() async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'mohsinkhan03061@gmail.com',
+      query:
+          'subject=Contact&body=Hello, I would like to get in touch with you.',
+    );
+
+    if (await canLaunch(emailUri.toString())) {
+      await launch(emailUri.toString());
+    } else {
+      throw 'Could not launch email client';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +37,7 @@ class MainDesktop extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Hi \nI'm Mohsin khan \nA Flutter Developer",
+                "Hi \nI'm Mohsin Khan \nA Flutter Developer",
                 style: TextStyle(
                   fontSize: 30,
                   height: 1.5,
@@ -38,7 +54,7 @@ class MainDesktop extends StatelessWidget {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             CustomColor.yellowPrimary)),
-                    onPressed: () {},
+                    onPressed: _launchEmail,
                     child: Text(
                       "Get in Touch",
                       style: TextStyle(color: CustomColor.whiteSecondary),
@@ -47,8 +63,9 @@ class MainDesktop extends StatelessWidget {
             ],
           ),
           Image.asset(
-            "assets/images/image.jpg",
-            width: screenWidth / 2,
+            "assets/images/03.jpg",
+            width: screenWidth / 4,
+            height: screenHeight / 4,
           )
         ],
       ),

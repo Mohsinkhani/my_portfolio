@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:myportfolio/constants/colors.dart';
 import 'package:myportfolio/constants/size.dart';
+import 'package:myportfolio/constants/sns_links.dart';
 import 'package:myportfolio/widgets/contact_section.dart';
 import 'package:myportfolio/widgets/drawer_mobile.dart';
 import 'package:myportfolio/widgets/footer.dart';
@@ -120,7 +121,7 @@ class _HomePageState extends State<HomePage> {
   void ScrollToSection(int navIndex) {
     if (navIndex == 4) {
       // open a blog page
-      // js.context.callMethod("open",[SnsLinks.blog)]);
+      js.context.callMethod("open", [SnsLinks.Resume]);
       return;
     }
     final Key = navBarKeys[navIndex];

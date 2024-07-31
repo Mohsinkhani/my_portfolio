@@ -1,13 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:myportfolio/constants/colors.dart';
 import 'package:myportfolio/constants/size.dart';
 import 'package:myportfolio/constants/sns_links.dart';
 import 'package:myportfolio/widgets/text_field.dart';
 import 'dart:js' as js;
 
-class ContactSection extends StatelessWidget {
+class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
+
+  @override
+  _ContactSectionState createState() => _ContactSectionState();
+}
+
+class _ContactSectionState extends State<ContactSection> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _messageController = TextEditingController();
+
+  void _sendEmail() async {
+    final name = _nameController.text;
+    final email = _emailController.text;
+    final message = _messageController.text;
+
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'mohsinkhan03061@gmail.com',
+      query:
+          'subject=Contact Form Message&body=Name: $name\nEmail: $email\n\n$message',
+    );
+
+    if (await canLaunch(emailUri.toString())) {
+      await launch(emailUri.toString());
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not launch email client')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +70,8 @@ class ContactSection extends StatelessWidget {
           ),
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 700),
-            child: const CustomeTextField(
+            child: CustomeTextField(
+              controller: _messageController,
               hintText: "Your message",
               maxLines: 10,
             ),
@@ -57,7 +88,7 @@ class ContactSection extends StatelessWidget {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             CustomColor.yellowPrimary)),
-                    onPressed: () {},
+                    onPressed: _sendEmail,
                     child: const Text(
                       "Get in touch",
                       style: TextStyle(color: Colors.white),
@@ -104,15 +135,15 @@ class ContactSection extends StatelessWidget {
                   width: 28,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  js.context.callMethod("open", [SnsLinks.whatsapp]);
-                },
-                child: Image.asset(
-                  "assets/images/whatsapp.png",
-                  width: 28,
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     js.context.callMethod("open", [SnsLinks.whatsapp]);
+              //   },
+              //   child: Image.asset(
+              //     "assets/images/whatsapp.png",
+              //     width: 28,
+              //   ),
+              // ),
               InkWell(
                 onTap: () {
                   js.context.callMethod("open", [SnsLinks.linkdin]);
@@ -132,11 +163,15 @@ class ContactSection extends StatelessWidget {
   Row buildNameEmailFieldDesktop() {
     return Row(
       children: [
-        Flexible(child: CustomeTextField(hintText: "Your name")),
+        Flexible(
+            child: CustomeTextField(
+                controller: _nameController, hintText: "Your name")),
         SizedBox(
           width: 15,
         ),
-        Flexible(child: CustomeTextField(hintText: "Your email")),
+        Flexible(
+            child: CustomeTextField(
+                controller: _emailController, hintText: "Your email")),
       ],
     );
   }
@@ -144,11 +179,15 @@ class ContactSection extends StatelessWidget {
   Column buildNameEmailFieldMobile() {
     return Column(
       children: [
-        Flexible(child: CustomeTextField(hintText: "Your name")),
+        Flexible(
+            child: CustomeTextField(
+                controller: _nameController, hintText: "Your name")),
         SizedBox(
           height: 15,
         ),
-        Flexible(child: CustomeTextField(hintText: "Your email")),
+        Flexible(
+            child: CustomeTextField(
+                controller: _emailController, hintText: "Your email")),
       ],
     );
   }
