@@ -9,18 +9,21 @@ class DrawerMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: CustomColor.scaffoldbgcolor,
+      width: 170,
+      backgroundColor: Colors.transparent,
       child: ListView(
         children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 20, bottom: 20),
+              padding: const EdgeInsets.only(right: 20.0, top: 20, bottom: 20),
               child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.close)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.close),
+                iconSize: 0,
+              ),
             ),
           ),
           for (int i = 0; i < navIcons.length; i++)
