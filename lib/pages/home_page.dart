@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 key: navBarKeys[1],
                 width: screenWidth,
                 padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-                color: Colors.blueGrey,
+                color: Colors.blueGrey.withOpacity(1.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

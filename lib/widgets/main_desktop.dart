@@ -1,10 +1,16 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:myportfolio/constants/colors.dart';
 
-class MainDesktop extends StatelessWidget {
+class MainDesktop extends StatefulWidget {
   const MainDesktop({super.key});
 
+  @override
+  State<MainDesktop> createState() => _MainDesktopState();
+}
+
+class _MainDesktopState extends State<MainDesktop> {
   void _launchEmail() async {
     final Uri emailUri = Uri(
       scheme: 'mailto',
@@ -20,6 +26,14 @@ class MainDesktop extends StatelessWidget {
     }
   }
 
+  bool _isHovered = false;
+
+  void _toggleHover(bool isHovered) {
+    setState(() {
+      _isHovered = isHovered;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -29,6 +43,9 @@ class MainDesktop extends StatelessWidget {
     return Container(
       height: screenHeight / 1.2,
       margin: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/code.jpg"),fit: BoxFit.cover)
+      ),
       constraints: BoxConstraints(minHeight: 350),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,36 +53,59 @@ class MainDesktop extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Hi \nI'm Mohsin Khan \nA Flutter Developer",
-                style: TextStyle(
+              ColorizeAnimatedTextKit(
+                text: [
+                  "Hi \nI am Mohsin Khan \nA Flutter Developer",
+                ],
+                textStyle: TextStyle(
                   fontSize: 30,
                   height: 1.5,
+                  fontFamily: "FreshMulberryDemo",
                   fontWeight: FontWeight.bold,
-                  color: CustomColor.whitePrimary,
                 ),
+                colors: [
+                  Colors.purple,
+                  Colors.blue,
+                  Colors.yellow,
+                  Colors.red,
+                ],
+                // textAlign: TextAlign.center,
+                // alignment: AlignmentDirectional.topStart,
               ),
               const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: 250,
-                child: ElevatedButton(
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  width: _isHovered ? 200 : 190,
+                  height: _isHovered ? 60 : 50,
+                  curve: Curves.easeInOut,
+                  child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            CustomColor.yellowPrimary)),
+                      backgroundColor: MaterialStateProperty.all(
+                          _isHovered ? Colors.orange : Colors.yellow),
+                    ),
                     onPressed: _launchEmail,
-                    child: Text(
-                      "Get in Touch",
-                      style: TextStyle(color: CustomColor.whiteSecondary),
-                    )),
+                    child: AnimatedDefaultTextStyle(
+                      duration: Duration(milliseconds: 300),
+                      style: TextStyle(
+                        color: _isHovered ? Colors.black : Colors.white,
+                        fontSize: _isHovered ? 18 : 16,
+                      ),
+                      child: Text("Get in Touch"),
+                    ),
+                    onHover: _toggleHover,
+                  ),
+                ),
               ),
             ],
           ),
           Image.asset(
             "assets/images/03.jpg",
-            width: screenWidth / 4,
-            height: screenHeight / 4,
+            width: screenWidth / 1.5,
+            height: screenHeight / 1.7,
           )
         ],
       ),
