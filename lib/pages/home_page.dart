@@ -35,7 +35,6 @@ class _HomePageState extends State<HomePage> {
     return LayoutBuilder(builder: (context, Constraints) {
       return Scaffold(
         key: Scaffoldkey,
-        backgroundColor: CustomColor.scaffoldbgcolor,
         endDrawer: Constraints.maxWidth >= MinDesktopWidth
             ? null
             : DrawerMobile(
@@ -72,15 +71,19 @@ class _HomePageState extends State<HomePage> {
                 const MainMobile(),
               //skills
               Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/bg4.jpg"),
+                        fit: BoxFit.cover)),
                 key: navBarKeys[1],
                 width: screenWidth,
                 padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-                color: Colors.blueGrey.withOpacity(1.0),
+                // color: Colors.blueGrey,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "What i can do",
+                      "My Stack",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -97,9 +100,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+
               //projects
               ProjectSection(
                 key: navBarKeys[2],

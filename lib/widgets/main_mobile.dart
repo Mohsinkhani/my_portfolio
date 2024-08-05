@@ -52,7 +52,7 @@ class _MainMobileState extends State<MainMobile> {
             shaderCallback: (bounds) {
               return LinearGradient(colors: [
                 CustomColor.scaffoldbgcolor.withOpacity(0.6),
-                CustomColor.scaffoldbgcolor.withOpacity(0.6),
+                CustomColor.bglight1.withOpacity(0.6),
               ]).createShader(bounds);
             },
             blendMode: BlendMode.darken,
@@ -66,26 +66,14 @@ class _MainMobileState extends State<MainMobile> {
             height: 15,
           ),
           //intro msg
-          ColorizeAnimatedTextKit(
-            text: [
-              "Hi \nI am Mohsin Khan \nA Flutter Developer",
-            ],
-            textStyle: TextStyle(
-              fontSize: 24,
-              height: 1.5,
-              fontWeight: FontWeight.bold,
-              color: CustomColor.whitePrimary,
-              fontFamily: "FreshMulberryDemo"
-            ),
-            colors: [
-              Colors.purple,
-              Colors.blue,
-              Colors.yellow,
-              Colors.red,
-            ],
-            // textAlign: TextAlign.center,
-            // alignment: AlignmentDirectional.topStart,
+          Text(
+            "Hi 👋, I'm Mohsin Khan a Flutter Developer with many years of experience.\nYou will explore about me more down there.",
+            style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+                fontStyle: FontStyle.italic),
           ),
+
           const SizedBox(
             height: 15,
           ),
@@ -102,7 +90,8 @@ class _MainMobileState extends State<MainMobile> {
               ),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
                 ),
@@ -110,12 +99,14 @@ class _MainMobileState extends State<MainMobile> {
                 child: AnimatedDefaultTextStyle(
                   duration: Duration(milliseconds: 300),
                   style: TextStyle(
-                    color: _isHovered ? Colors.black : CustomColor.whiteSecondary,
+                    color:
+                        _isHovered ? Colors.black : CustomColor.whiteSecondary,
                     fontSize: _isHovered ? 18 : 16,
                     fontWeight: FontWeight.bold,
                   ),
                   child: Center(
-                    child: Text("Get in Touch",
+                    child: Text(
+                      "Get in Touch",
                       // style: TextStyle(fontFamily: "FreshMulberryDemo"),
                     ),
                   ),

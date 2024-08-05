@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:myportfolio/constants/colors.dart';
 
@@ -41,11 +42,15 @@ class _MainDesktopState extends State<MainDesktop> {
     final screenHeight = screenSize.height;
 
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              "assets/images/bg3.jpg",
+            ),
+            fit: BoxFit.cover),
+      ),
       height: screenHeight / 1.2,
       margin: EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage("assets/images/code.jpg"),fit: BoxFit.cover)
-      ),
       constraints: BoxConstraints(minHeight: 350),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,24 +58,13 @@ class _MainDesktopState extends State<MainDesktop> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ColorizeAnimatedTextKit(
-                text: [
-                  "Hi \nI am Mohsin Khan \nA Flutter Developer",
-                ],
-                textStyle: TextStyle(
-                  fontSize: 30,
-                  height: 1.5,
-                  fontFamily: "FreshMulberryDemo",
-                  fontWeight: FontWeight.bold,
-                ),
-                colors: [
-                  Colors.purple,
-                  Colors.blue,
-                  Colors.yellow,
-                  Colors.red,
-                ],
-                // textAlign: TextAlign.center,
-                // alignment: AlignmentDirectional.topStart,
+              Text(
+                "Hi 👋, I'm Mohsin Khan a Flutter Developer with many years of experience.\nYou will explore about me more down there.",
+                style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic),
               ),
               const SizedBox(
                 height: 15,
@@ -85,16 +79,19 @@ class _MainDesktopState extends State<MainDesktop> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          _isHovered ? Colors.orange : Colors.yellow),
+                        _isHovered
+                            ? Color.fromARGB(255, 239, 238, 236)
+                            : Colors.orange,
+                      ),
                     ),
                     onPressed: _launchEmail,
                     child: AnimatedDefaultTextStyle(
                       duration: Duration(milliseconds: 300),
                       style: TextStyle(
-                        color: _isHovered ? Colors.black : Colors.white,
+                        color: _isHovered ? Colors.black : Colors.black,
                         fontSize: _isHovered ? 18 : 16,
                       ),
-                      child: Text("Get in Touch"),
+                      child: Text("Reach me"),
                     ),
                     onHover: _toggleHover,
                   ),
@@ -102,11 +99,14 @@ class _MainDesktopState extends State<MainDesktop> {
               ),
             ],
           ),
-          Image.asset(
-            "assets/images/03.jpg",
-            width: screenWidth / 1.5,
-            height: screenHeight / 1.7,
-          )
+          Container(
+              width: 190.0,
+              height: 190.0,
+              decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage("assets/images/mypicbg.jpeg")))),
         ],
       ),
     );

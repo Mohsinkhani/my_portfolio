@@ -42,8 +42,13 @@ class _ContactSectionState extends State<ContactSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
+        color: CustomColor.bglight1,
+      ),
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-      color: CustomColor.bglight1,
       child: Column(
         children: [
           Text(

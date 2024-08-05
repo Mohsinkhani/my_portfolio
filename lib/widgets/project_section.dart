@@ -10,13 +10,17 @@ class ProjectSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/bg2.jpg"), fit: BoxFit.cover)),
+      // color: Colors.green,
       width: screenWidth,
       padding: EdgeInsets.fromLTRB(25, 20, 25, 60),
       child: Column(
         children: [
           //work project title
           Text(
-            "Work Projects",
+            "Organizations Projects",
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -42,7 +46,7 @@ class ProjectSection extends StatelessWidget {
             height: 80,
           ),
           Text(
-            "hobby Projects",
+            "My Startups",
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
