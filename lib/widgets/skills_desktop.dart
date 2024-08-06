@@ -8,16 +8,23 @@ class SkillsDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        bool isWideScreen = constraints.maxWidth > 1050; // Adjust the width threshold as needed
+        return isWideScreen ? buildRowLayout() : buildColumnLayout();
+      },
+    );
+  }
+
+  Widget buildRowLayout() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        //plateform
-        SizedBox(
-          // color: Colors.black,
-          height: 500,
-          width: 500,
+        // Platform
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 450, maxHeight: 300, minWidth: 200),
           child: AnimationLimiter(
             child: ListView.builder(
               itemCount: plateformItems.length,
@@ -29,8 +36,7 @@ class SkillsDesktop extends StatelessWidget {
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
                         child: Container(
                           width: 200,
                           decoration: BoxDecoration(
@@ -59,17 +65,12 @@ class SkillsDesktop extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          width: 50,
-        ),
-
-        SizedBox(
-          // color: Colors.black,
-          height: 300,
-          width: 550,
+        const SizedBox(width: 50),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 550, maxHeight: 300,minHeight: 300, minWidth: 400),
           child: AnimationLimiter(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,childAspectRatio: 3),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, childAspectRatio: 3),
               itemCount: skillsItem.length,
               itemBuilder: (BuildContext context, int index) {
                 return AnimationConfiguration.staggeredList(
@@ -79,11 +80,9 @@ class SkillsDesktop extends StatelessWidget {
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
                         child: Container(
                           height: 50,
-                          // width: 200,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -93,7 +92,6 @@ class SkillsDesktop extends StatelessWidget {
                             color: CustomColor.bglight2.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(5),
                           ),
-
                           child: Row(
                             children: [
                               Padding(
@@ -116,7 +114,109 @@ class SkillsDesktop extends StatelessWidget {
             ),
           ),
         ),
-       ],
+      ],
+    );
+  }
+
+  Widget buildColumnLayout() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Platform
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400, maxHeight: 300, minWidth: 300),
+          child: AnimationLimiter(
+            child: ListView.builder(
+              itemCount: plateformItems.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  duration: const Duration(milliseconds: 1500),
+                  child: SlideAnimation(
+                    verticalOffset: 50.0,
+                    child: FadeInAnimation(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                        child: Container(
+                          width: 200,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: CustomColor.bglight2.withOpacity(0.2),
+                              )
+                            ],
+                            color: CustomColor.bglight2.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 20,
+                            ),
+                            leading: Image.asset(plateformItems[index]["img"]),
+                            title: Text(plateformItems[index]["title"]),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 50),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 550, maxHeight: 500, minWidth: 100),
+          child: AnimationLimiter(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 3),
+              itemCount: skillsItem.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  duration: const Duration(milliseconds: 1500),
+                  child: SlideAnimation(
+                    verticalOffset: 50.0,
+                    child: FadeInAnimation(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: CustomColor.bglight2.withOpacity(0.2),
+                              )
+                            ],
+                            color: CustomColor.bglight2.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Image.asset(
+                                  skillsItem[index]["img"],
+                                  width: 40,
+                                  height: 40,
+                                ),
+                              ),
+                              Expanded(child: Text(skillsItem[index]["title"])),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
