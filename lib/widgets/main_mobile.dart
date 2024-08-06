@@ -1,7 +1,6 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:myportfolio/constants/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainMobile extends StatefulWidget {
   const MainMobile({super.key});
@@ -41,8 +40,8 @@ class _MainMobileState extends State<MainMobile> {
     final screenHeight = screenSize.height;
     return Container(
       height: screenHeight,
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-      constraints: BoxConstraints(minHeight: 560),
+      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+      constraints: const BoxConstraints(minHeight: 560),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +51,6 @@ class _MainMobileState extends State<MainMobile> {
             shaderCallback: (bounds) {
               return LinearGradient(colors: [
                 CustomColor.scaffoldbgcolor.withOpacity(0.6),
-                CustomColor.bglight1.withOpacity(0.6),
               ]).createShader(bounds);
             },
             blendMode: BlendMode.darken,
@@ -62,11 +60,11 @@ class _MainMobileState extends State<MainMobile> {
               height: screenHeight / 4,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           //intro msg
-          Text(
+          const Text(
             "Hi 👋, I'm Mohsin Khan a Flutter Developer with many years of experience.\nYou will explore about me more down there.",
             style: TextStyle(
                 fontWeight: FontWeight.w800,
@@ -81,7 +79,7 @@ class _MainMobileState extends State<MainMobile> {
             onEnter: (_) => _toggleHover(true),
             onExit: (_) => _toggleHover(false),
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               width: _isHovered ? 200 : 190,
               height: _isHovered ? 60 : 50,
               decoration: BoxDecoration(
@@ -97,14 +95,14 @@ class _MainMobileState extends State<MainMobile> {
                 ),
                 onPressed: _launchEmail,
                 child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   style: TextStyle(
                     color:
                         _isHovered ? Colors.black : CustomColor.whiteSecondary,
                     fontSize: _isHovered ? 18 : 16,
                     fontWeight: FontWeight.bold,
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Get in Touch",
                       // style: TextStyle(fontFamily: "FreshMulberryDemo"),

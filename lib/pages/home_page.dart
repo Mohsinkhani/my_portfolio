@@ -1,6 +1,6 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:myportfolio/constants/colors.dart';
 import 'package:myportfolio/constants/size.dart';
 import 'package:myportfolio/constants/sns_links.dart';
 import 'package:myportfolio/widgets/contact_section.dart';
@@ -13,7 +13,6 @@ import 'package:myportfolio/widgets/main_mobile.dart';
 import 'package:myportfolio/widgets/project_section.dart';
 import 'package:myportfolio/widgets/skills_desktop.dart';
 import 'package:myportfolio/widgets/skills_mobile.dart';
-import 'dart:js' as js;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,110 +22,138 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Scaffoldkey = GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final scrollController = ScrollController();
   final List<GlobalKey> navBarKeys = List.generate(4, (index) => GlobalKey());
+
+  bool isSkillsVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    final renderBox = navBarKeys[2].currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      final position = renderBox.localToGlobal(Offset.zero).dy;
+      final screenHeight = MediaQuery.of(context).size.height;
+      if (position < screenHeight) {
+        setState(() {
+          isSkillsVisible = true;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
 
-    return LayoutBuilder(builder: (context, Constraints) {
-      return Scaffold(
-        key: Scaffoldkey,
-        endDrawer: Constraints.maxWidth >= MinDesktopWidth
-            ? null
-            : DrawerMobile(
-                onNavItemTap: (int navIndex) {
-                  Scaffoldkey.currentState?.closeEndDrawer();
-                  ScrollToSection(navIndex);
-                },
-              ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          controller: scrollController,
-          child: Column(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [
+          Color(0xffaf6480),
+          Color(0xffc3cee5),
+        ]),
+      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          key: scaffoldKey,
+          endDrawer: constraints.maxWidth >= MinDesktopWidth
+              ? null
+              : DrawerMobile(
+            onNavItemTap: (int navIndex) {
+              scaffoldKey.currentState?.closeEndDrawer();
+              scrollToSection(navIndex);
+            },
+          ),
+          body: ListView(
+            controller: scrollController,
+            shrinkWrap: true,
             children: [
               SizedBox(
                 key: navBarKeys.first,
               ),
-              //main
-              if (Constraints.maxWidth >= MinDesktopWidth)
+              // main
+              if (constraints.maxWidth >= MinDesktopWidth)
                 HeaderDesktop(
                   onNavMenuTap: (int navIndex) {
-                    ScrollToSection(navIndex);
+                    scrollToSection(navIndex);
                   },
                 )
               else
                 HeaderMobile(
                   onLogoTap: () {},
                   onMenuTap: () {
-                    Scaffoldkey.currentState?.openEndDrawer();
+                    scaffoldKey.currentState?.openEndDrawer();
                   },
                 ),
-              if (Constraints.maxWidth >= MinDesktopWidth)
+              if (constraints.maxWidth >= MinDesktopWidth)
                 const MainDesktop()
               else
                 const MainMobile(),
-              //skills
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/bg4.jpg"),
-                        fit: BoxFit.cover)),
-                key: navBarKeys[1],
-                width: screenWidth,
-                padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-                // color: Colors.blueGrey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "My Stack",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: CustomColor.whitePrimary),
+              // skills
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "My Stack",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      // color: CustomColor.whitePrimary,
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    //plateform and skills
-                    if (Constraints.maxWidth >= MedDesktopWidth)
-                      const SkillsDesktop()
-                    else
-                      const SkillsMobile()
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  // platform and skills
+                  Visibility(
+                    visible: isSkillsVisible,
+                    child: constraints.maxWidth >= MedDesktopWidth
+                        ? const SkillsDesktop()
+                        : const SkillsMobile(),
+                  ),
+                ],
               ),
-
-              //projects
+              // projects
               ProjectSection(
                 key: navBarKeys[2],
               ),
-              //contact
+              // contact
               ContactSection(key: navBarKeys[3]),
               const SizedBox(
                 height: 30,
               ),
-              //footer
+              // footer
               const Footer(),
             ],
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 
-  void ScrollToSection(int navIndex) {
+  void scrollToSection(int navIndex) {
     if (navIndex == 4) {
       // open a blog page
       js.context.callMethod("open", [SnsLinks.Resume]);
       return;
     }
-    final Key = navBarKeys[navIndex];
-    Scrollable.ensureVisible(Key.currentContext!,
+    final key = navBarKeys[navIndex];
+    Scrollable.ensureVisible(key.currentContext!,
         duration: const Duration(
           milliseconds: 500,
         ),

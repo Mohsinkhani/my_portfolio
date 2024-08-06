@@ -11,16 +11,16 @@ class HeaderMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      margin: EdgeInsets.fromLTRB(40, 5, 20, 5),
+      margin: const EdgeInsets.fromLTRB(40, 5, 20, 5),
       decoration: HeaderDecration,
       child: Row(
         children: [
           SiteLogo(
             onTap: onLogoTap,
           ),
-          Spacer(),
-          IconButton(onPressed: onMenuTap, icon: Icon(Icons.menu)),
-          SizedBox(
+          const Spacer(),
+          IconButton(onPressed: onMenuTap, icon: const Icon(Icons.menu)),
+          const SizedBox(
             width: 15,
           )
         ],

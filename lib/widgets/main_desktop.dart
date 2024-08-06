@@ -1,8 +1,5 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:myportfolio/constants/colors.dart';
 
 class MainDesktop extends StatefulWidget {
   const MainDesktop({super.key});
@@ -42,23 +39,16 @@ class _MainDesktopState extends State<MainDesktop> {
     final screenHeight = screenSize.height;
 
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              "assets/images/bg3.jpg",
-            ),
-            fit: BoxFit.cover),
-      ),
       height: screenHeight / 1.2,
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      constraints: BoxConstraints(minHeight: 350),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      constraints: const BoxConstraints(minHeight: 350),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Hi 👋, I'm Mohsin Khan a Flutter Developer with many years of experience.\nYou will explore about me more down there.",
                 style: TextStyle(
                     fontWeight: FontWeight.w800,
@@ -72,7 +62,7 @@ class _MainDesktopState extends State<MainDesktop> {
               SizedBox(
                 width: 250,
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   width: _isHovered ? 200 : 190,
                   height: _isHovered ? 60 : 50,
                   curve: Curves.easeInOut,
@@ -80,20 +70,20 @@ class _MainDesktopState extends State<MainDesktop> {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                         _isHovered
-                            ? Color.fromARGB(255, 239, 238, 236)
+                            ? const Color.fromARGB(255, 239, 238, 236)
                             : Colors.orange,
                       ),
                     ),
                     onPressed: _launchEmail,
+                    onHover: _toggleHover,
                     child: AnimatedDefaultTextStyle(
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       style: TextStyle(
                         color: _isHovered ? Colors.black : Colors.black,
                         fontSize: _isHovered ? 18 : 16,
                       ),
-                      child: Text("Reach me"),
+                      child: const Text(" Reach me"),
                     ),
-                    onHover: _toggleHover,
                   ),
                 ),
               ),
@@ -102,9 +92,9 @@ class _MainDesktopState extends State<MainDesktop> {
           Container(
               width: 190.0,
               height: 190.0,
-              decoration: new BoxDecoration(
+              decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  image: new DecorationImage(
+                  image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage("assets/images/mypicbg.jpeg")))),
         ],

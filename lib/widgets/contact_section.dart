@@ -10,10 +10,10 @@ class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
 
   @override
-  _ContactSectionState createState() => _ContactSectionState();
+  ContactSectionState createState() => ContactSectionState();
 }
 
-class _ContactSectionState extends State<ContactSection> {
+class ContactSectionState extends State<ContactSection> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
@@ -34,7 +34,7 @@ class _ContactSectionState extends State<ContactSection> {
       await launch(emailUri.toString());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch email client')),
+        const SnackBar(content: Text('Could not launch email client')),
       );
     }
   }
@@ -42,10 +42,8 @@ class _ContactSectionState extends State<ContactSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
-        color: CustomColor.bglight1,
+      decoration: const BoxDecoration(
+         // color: CustomColor.bglight1,
       ),
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
@@ -104,7 +102,7 @@ class _ContactSectionState extends State<ContactSection> {
           ),
           ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 300),
-              child: Divider()),
+              child: const Divider()),
           const SizedBox(
             height: 15,
           ),
@@ -171,7 +169,7 @@ class _ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Flexible(
@@ -187,7 +185,7 @@ class _ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Flexible(

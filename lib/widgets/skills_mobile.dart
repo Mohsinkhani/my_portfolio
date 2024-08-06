@@ -8,19 +8,19 @@ class SkillsMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 500),
+      constraints: const BoxConstraints(maxWidth: 500),
       child: Column(
         children: [
           for (int i = 0; i < plateformItems.length; i++)
             Container(
-              margin: EdgeInsets.only(bottom: 5),
+              margin: const EdgeInsets.only(bottom: 5),
               width: double.maxFinite,
               decoration: BoxDecoration(
                   color: CustomColor.bglight2,
                   borderRadius: BorderRadius.circular(5)),
               child: ListTile(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 leading: Image.asset(
                   plateformItems[i]["img"],
                   width: 26,
@@ -36,7 +36,7 @@ class SkillsMobile extends StatelessWidget {
             children: [
               for (int i = 0; i < skillsItem.length; i++)
                 Chip(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 12,
                   ),
