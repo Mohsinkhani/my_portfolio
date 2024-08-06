@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainDesktop extends StatefulWidget {
@@ -37,7 +38,7 @@ class _MainDesktopState extends State<MainDesktop> {
     final screenHeight = screenSize.height;
 
     return Container(
-      height: screenHeight / 1.2,
+      height:0.9.sh,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       constraints: const BoxConstraints(minHeight: 350),
       child: LayoutBuilder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:myportfolio/constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,9 +40,9 @@ class _MainMobileState extends State<MainMobile> {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
     return Container(
-      height: screenHeight,
+      height: 0.65.sh,
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-      constraints: const BoxConstraints(minHeight: 560),
+      constraints: const BoxConstraints(minHeight: 100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +51,8 @@ class _MainMobileState extends State<MainMobile> {
           ShaderMask(
             shaderCallback: (bounds) {
               return LinearGradient(colors: [
-                CustomColor.scaffoldbgcolor.withOpacity(0.6),
+                CustomColor.whitePrimary.withOpacity(0.6),
+                CustomColor.whitePrimary.withOpacity(0.4),
               ]).createShader(bounds);
             },
             blendMode: BlendMode.darken,
