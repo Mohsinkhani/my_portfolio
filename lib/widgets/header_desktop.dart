@@ -23,6 +23,7 @@ class HeaderDesktop extends StatelessWidget {
           ),
           const Spacer(),
           for (int i = 0; i < navTitles.length; i++)
+            i==0?const SizedBox.shrink():
             Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: TextButton(

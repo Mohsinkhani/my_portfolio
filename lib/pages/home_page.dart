@@ -1,6 +1,7 @@
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:myportfolio/constants/size.dart';
 import 'package:myportfolio/constants/sns_links.dart';
 import 'package:myportfolio/widgets/contact_section.dart';
@@ -23,36 +24,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final scrollController = ScrollController();
-  final List<GlobalKey> navBarKeys = List.generate(4, (index) => GlobalKey());
+  final ItemScrollController itemScrollController = ItemScrollController();
+  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
 
   bool isSkillsVisible = false;
 
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(_scrollListener);
+    itemPositionsListener.itemPositions.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    scrollController.removeListener(_scrollListener);
-    scrollController.dispose();
     super.dispose();
   }
 
   void _scrollListener() {
-    final renderBox = navBarKeys[2].currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox != null) {
-      final position = renderBox.localToGlobal(Offset.zero).dy;
-      final screenHeight = MediaQuery.of(context).size.height;
-      if (position < screenHeight) {
-        setState(() {
-          isSkillsVisible = true;
-        });
+    final positions = itemPositionsListener.itemPositions.value;
+    if (positions.isNotEmpty) {
+      final skillsPosition = positions.where((position) => position.index == 2);
+      if (skillsPosition.isNotEmpty) {
+        final position = skillsPosition.first;
+        final screenHeight = MediaQuery.of(context).size.height;
+        if (position.itemLeadingEdge < screenHeight) {
+          setState(() {
+            isSkillsVisible = true;
+          });
+        }
       }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,67 +82,63 @@ class _HomePageState extends State<HomePage> {
               scrollToSection(navIndex);
             },
           ),
-          body: ListView(
-            controller: scrollController,
-            shrinkWrap: true,
-            children: [
-              SizedBox(
-                key: navBarKeys.first,
-              ),
-              // main
-              if (constraints.maxWidth >= MinDesktopWidth)
-                HeaderDesktop(
-                  onNavMenuTap: (int navIndex) {
-                    scrollToSection(navIndex);
-                  },
-                )
-              else
-                HeaderMobile(
-                  onLogoTap: () {},
-                  onMenuTap: () {
-                    scaffoldKey.currentState?.openEndDrawer();
-                  },
-                ),
-              if (constraints.maxWidth >= MinDesktopWidth)
-                const MainDesktop()
-              else
-                const MainMobile(),
-              // skills
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    "My Stack",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      // color: CustomColor.whitePrimary,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  // platform and skills
-                  Visibility(
-                    visible: isSkillsVisible,
-                    child: constraints.maxWidth >= MedDesktopWidth
-                        ? const SkillsDesktop()
-                        : const SkillsMobile(),
-                  ),
-                ],
-              ),
-              // projects
-              ProjectSection(
-                key: navBarKeys[2],
-              ),
-              // contact
-              ContactSection(key: navBarKeys[3]),
-              const SizedBox(
-                height: 30,
-              ),
-              // footer
-              const Footer(),
-            ],
+          body: ScrollablePositionedList.builder(
+            itemCount: 6, // Ensure itemCount is correct
+            itemScrollController: itemScrollController,
+            itemPositionsListener: itemPositionsListener,
+            itemBuilder: (context, index) {
+              switch (index) {
+                case 0:
+                  return constraints.maxWidth >= MinDesktopWidth
+                      ? HeaderDesktop(
+                    onNavMenuTap: (int navIndex) {
+                      scrollToSection(navIndex);
+                    },
+                  )
+                      : HeaderMobile(
+                    onLogoTap: () {},
+                    onMenuTap: () {
+                      scaffoldKey.currentState?.openEndDrawer();
+                    },
+                  );
+                case 1:
+                  return constraints.maxWidth >= MinDesktopWidth
+                      ? const MainDesktop()
+                      : const MainMobile();
+                case 2:
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        "My Stack",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          // color: CustomColor.whitePrimary,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      // platform and skills
+                      Visibility(
+                        visible: isSkillsVisible,
+                        child: constraints.maxWidth >= MedDesktopWidth
+                            ? const SkillsDesktop()
+                            : const SkillsMobile(),
+                      ),
+                    ],
+                  );
+                case 3:
+                  return const ProjectSection();
+                case 4:
+                  return const ContactSection();
+                case 5:
+                  return const Footer();
+                default:
+                  return const SizedBox();
+              }
+            },
           ),
         );
       }),
@@ -147,16 +146,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   void scrollToSection(int navIndex) {
-    if (navIndex == 4) {
+    if (navIndex == 5) {
       // open a blog page
       js.context.callMethod("open", [SnsLinks.Resume]);
       return;
     }
-    final key = navBarKeys[navIndex];
-    Scrollable.ensureVisible(key.currentContext!,
-        duration: const Duration(
-          milliseconds: 500,
-        ),
-        curve: Curves.easeInOut);
+    itemScrollController.scrollTo(
+      index: navIndex,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 }
