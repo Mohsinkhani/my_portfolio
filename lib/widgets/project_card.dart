@@ -33,10 +33,10 @@ class _ProjectCardWidgetState extends State<ProjectCardWidget> {
         },
         child: AnimatedContainer(
           curve: Curves.fastOutSlowIn,
-          duration: const Duration(milliseconds: 1500),
+          duration: const Duration(milliseconds: 1000),
           clipBehavior: Clip.antiAlias,
-          height: isHovering ? 320 : 295,
-          width: isHovering ? 295 : 265,
+          height: isHovering ? 328 : 303,
+          width: isHovering ? 303 : 270,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(19),
             color: Colors.black54.withOpacity(0.1),
@@ -46,26 +46,29 @@ class _ProjectCardWidgetState extends State<ProjectCardWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AnimatedContainer(
-                curve: Curves.fastOutSlowIn,
-                duration: const Duration(milliseconds: 1500),
-                height: 155,
-                width: isHovering ? 295 : 265,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          widget.project.image,
-                        ),
-                        fit: BoxFit.contain)),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: AnimatedContainer(
+                  curve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 1000),
+                  height: 155,
+                  width: isHovering ? 295 : 265,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            widget.project.image,
+                          ),
+                          fit: BoxFit.contain)),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(12, 15, 12, 12),
                 child: Text(
                   widget.project.title,
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: CustomColor.whitePrimary,
-                  ),
+                      fontWeight: FontWeight.w600,
+                      color: CustomColor.whitePrimary,
+                      fontFamily: "FreshMulberryDemo"),
                 ),
               ),
               Padding(
@@ -100,38 +103,41 @@ class _ProjectCardWidgetState extends State<ProjectCardWidget> {
                               .callMethod("open", [widget.project.androidLink]);
                         },
                         child: Image.asset(
-                          "assets/images/android.png",
+                          widget.project.androidLink!
+                                  .contains('play.google.com')
+                              ? "assets/images/playstoreicon.png"
+                              : "assets/images/github.jpg",
                           width: 19,
                         ),
                       ),
-                    if (widget.project.iosLink != null)
-                      InkWell(
-                        onTap: () {
-                          js.context
-                              .callMethod("open", [widget.project.iosLink]);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 6.0),
-                          child: Image.asset(
-                            "assets/images/ios.png",
-                            width: 17,
-                          ),
-                        ),
-                      ),
-                    if (widget.project.weblink != null)
-                      InkWell(
-                        onTap: () {
-                          js.context
-                              .callMethod("open", [widget.project.weblink]);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 6.0),
-                          child: Image.asset(
-                            "assets/images/web.png",
-                            width: 17,
-                          ),
-                        ),
-                      ),
+                    // if (widget.project.iosLink != null)
+                    //   InkWell(
+                    //     onTap: () {
+                    //       js.context
+                    //           .callMethod("open", [widget.project.iosLink]);
+                    //     },
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.only(left: 6.0),
+                    //       child: Image.asset(
+                    //         "assets/images/ios.png",
+                    //         width: 17,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // if (widget.project.weblink != null)
+                    //   InkWell(
+                    //     onTap: () {
+                    //       js.context
+                    //           .callMethod("open", [widget.project.weblink]);
+                    //     },
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.only(left: 6.0),
+                    //       child: Image.asset(
+                    //         "assets/images/web.png",
+                    //         width: 17,
+                    //       ),
+                    //     ),
+                    //   ),
                   ],
                 ),
               )

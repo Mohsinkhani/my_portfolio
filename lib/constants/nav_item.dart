@@ -9,6 +9,7 @@ List<String> navTitles = [
   "Resume",
 ];
 List<IconData> navIcons = [
+  Icons.mark_as_unread,
   Icons.home,
   Icons.handyman_outlined,
   Icons.apps,

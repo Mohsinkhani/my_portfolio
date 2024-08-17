@@ -3,10 +3,15 @@ import 'package:myportfolio/constants/colors.dart';
 
 class CustomeTextField extends StatelessWidget {
   const CustomeTextField(
-      {super.key, this.controller, this.hintText, this.maxLines = 1});
+      {super.key,
+      this.controller,
+      this.hintText,
+      this.maxLines = 1,
+      this.labelText});
   final TextEditingController? controller;
   final int maxLines;
   final String? hintText;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +26,10 @@ class CustomeTextField extends StatelessWidget {
           focusedBorder: getInputBorder,
           enabledBorder: getInputBorder,
           border: getInputBorder,
+          // labelText: labelText,
+          // labelStyle: TextStyle(color: Colors.black ),
           hintText: hintText,
-          hintStyle: TextStyle(color: CustomColor.whitePrimary)),
+          hintStyle: TextStyle(color: Colors.grey)),
     );
   }
 

@@ -57,7 +57,7 @@ class _MainMobileState extends State<MainMobile> {
             },
             blendMode: BlendMode.darken,
             child: Image.asset(
-              "assets/images/03.jpg",
+              "assets/images/mypicbg.jpeg",
               width: screenWidth / 4,
               height: screenHeight / 4,
             ),
@@ -85,7 +85,9 @@ class _MainMobileState extends State<MainMobile> {
               width: _isHovered ? 200 : 190,
               height: _isHovered ? 60 : 50,
               decoration: BoxDecoration(
-                color: _isHovered ? Colors.orange : CustomColor.yellowPrimary,
+                color: _isHovered
+                    ? CustomColor.whitePrimary
+                    : CustomColor.yellowPrimary,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: ElevatedButton(
@@ -99,15 +101,14 @@ class _MainMobileState extends State<MainMobile> {
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 300),
                   style: TextStyle(
-                    color:
-                        _isHovered ? Colors.black : CustomColor.whiteSecondary,
+                    color: _isHovered ? Colors.black : Colors.black,
                     fontSize: _isHovered ? 18 : 16,
-                    fontWeight: FontWeight.bold,
+                    //   fontWeight: FontWeight.bold,
                   ),
                   child: const Center(
                     child: Text(
-                      "Get in Touch",
-                      // style: TextStyle(fontFamily: "FreshMulberryDemo"),
+                      "Reach me",
+                      style: TextStyle(fontFamily: "FreshMulberryDemo"),
                     ),
                   ),
                 ),

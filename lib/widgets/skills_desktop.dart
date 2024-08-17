@@ -11,7 +11,8 @@ class SkillsDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isWideScreen = constraints.maxWidth > 1050; // Adjust the width threshold as needed
+        bool isWideScreen =
+            constraints.maxWidth > 1050; // Adjust the width threshold as needed
         return isWideScreen ? buildRowLayout() : buildColumnLayout();
       },
     );
@@ -25,19 +26,21 @@ class SkillsDesktop extends StatelessWidget {
       children: [
         // Platform
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450, maxHeight: 300, minWidth: 200),
+          constraints: const BoxConstraints(
+              maxWidth: 450, maxHeight: 300, minWidth: 200),
           child: AnimationLimiter(
             child: ListView.builder(
               itemCount: plateformItems.length,
               itemBuilder: (BuildContext context, int index) {
                 return AnimationConfiguration.staggeredList(
                   position: index,
-                  duration: const Duration(milliseconds: 1500),
+                  duration: const Duration(milliseconds: 2000),
                   child: SlideAnimation(
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 5),
                         child: Container(
                           width: 200,
                           decoration: BoxDecoration(
@@ -55,7 +58,10 @@ class SkillsDesktop extends StatelessWidget {
                               horizontal: 20,
                             ),
                             leading: Image.asset(plateformItems[index]["img"]),
-                            title: Text(plateformItems[index]["title"]),
+                            title: Text(
+                              plateformItems[index]["title"],
+                              style: TextStyle(fontFamily: "FreshMulberryDemo"),
+                            ),
                           ),
                         ),
                       ),
@@ -68,10 +74,12 @@ class SkillsDesktop extends StatelessWidget {
         ),
         const SizedBox(width: 50),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 550, maxHeight: 300,minHeight: 300, minWidth: 400),
+          constraints: const BoxConstraints(
+              maxWidth: 550, maxHeight: 300, minHeight: 300, minWidth: 400),
           child: AnimationLimiter(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, childAspectRatio: 3),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, childAspectRatio: 3),
               itemCount: skillsItem.length,
               itemBuilder: (BuildContext context, int index) {
                 return AnimationConfiguration.staggeredList(
@@ -81,7 +89,8 @@ class SkillsDesktop extends StatelessWidget {
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 5),
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
@@ -103,7 +112,12 @@ class SkillsDesktop extends StatelessWidget {
                                   height: 40,
                                 ),
                               ),
-                              Expanded(child: Text(skillsItem[index]["title"])),
+                              Expanded(
+                                  child: Text(
+                                skillsItem[index]["title"],
+                                style:
+                                    TextStyle(fontFamily: "FreshMulberryDemo"),
+                              )),
                             ],
                           ),
                         ),
@@ -127,7 +141,8 @@ class SkillsDesktop extends StatelessWidget {
       children: [
         // Platform
         ConstrainedBox(
-          constraints:   BoxConstraints(maxWidth: 0.95.sw, maxHeight: 300, minWidth: 100),
+          constraints:
+              BoxConstraints(maxWidth: 0.95.sw, maxHeight: 300, minWidth: 100),
           child: AnimationLimiter(
             child: ListView.builder(
               itemCount: plateformItems.length,
@@ -139,7 +154,8 @@ class SkillsDesktop extends StatelessWidget {
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 5),
                         child: Container(
                           width: 200,
                           decoration: BoxDecoration(
@@ -170,10 +186,12 @@ class SkillsDesktop extends StatelessWidget {
         ),
         const SizedBox(height: 50),
         ConstrainedBox(
-          constraints:   BoxConstraints(maxWidth:500.sp, maxHeight: 200 , minWidth: 100),
+          constraints:
+              BoxConstraints(maxWidth: 500.sp, maxHeight: 200, minWidth: 100),
           child: AnimationLimiter(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, childAspectRatio: 4),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, childAspectRatio: 4),
               itemCount: skillsItem.length,
               itemBuilder: (BuildContext context, int index) {
                 return Center(
@@ -184,7 +202,8 @@ class SkillsDesktop extends StatelessWidget {
                       verticalOffset: 50.0,
                       child: FadeInAnimation(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 5),
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
@@ -209,7 +228,8 @@ class SkillsDesktop extends StatelessWidget {
                                     height: 40,
                                   ),
                                 ),
-                                Expanded(child: Text(skillsItem[index]["title"])),
+                                Expanded(
+                                    child: Text(skillsItem[index]["title"])),
                               ],
                             ),
                           ),

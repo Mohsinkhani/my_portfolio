@@ -23,22 +23,24 @@ class HeaderDesktop extends StatelessWidget {
           ),
           const Spacer(),
           for (int i = 0; i < navTitles.length; i++)
-            i==0?const SizedBox.shrink():
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: TextButton(
-                  onPressed: () {
-                    onNavMenuTap(i);
-                  },
-                  child: Text(
-                    navTitles[i],
-                    style: TextStyle(
-                      color: CustomColor.whitePrimary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )),
-            ),
+            i == 0
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: TextButton(
+                        onPressed: () {
+                          onNavMenuTap(i);
+                        },
+                        child: Text(
+                          navTitles[i],
+                          style: TextStyle(
+                            color: CustomColor.whitePrimary,
+                            fontFamily: "FreshMulberryDemo",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  ),
         ],
       ),
     );

@@ -27,18 +27,21 @@ class DrawerMobile extends StatelessWidget {
             ),
           ),
           for (int i = 0; i < navIcons.length; i++)
-            i==0?const SizedBox.shrink():ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 30),
-              titleTextStyle: TextStyle(
-                  fontSize: 16,
-                  color: CustomColor.whitePrimary,
-                  fontWeight: FontWeight.w600),
-              onTap: () {
-                onNavItemTap(i);
-              },
-              leading: Icon(navIcons[i]),
-              title: Text(navTitles[i]),
-            )
+            i == 0
+                ? const SizedBox.shrink()
+                : ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 30),
+                    titleTextStyle: TextStyle(
+                        fontSize: 16,
+                        color: CustomColor.whitePrimary,
+                        fontFamily: "FreshMulberryDemo",
+                        fontWeight: FontWeight.w600),
+                    onTap: () {
+                      onNavItemTap(i);
+                    },
+                    leading: Icon(navIcons[i]),
+                    title: Text(navTitles[i]),
+                  )
         ],
       ),
     );

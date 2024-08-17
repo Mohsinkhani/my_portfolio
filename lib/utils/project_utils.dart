@@ -48,7 +48,7 @@ List<ProjectUtils> hobbyProjectUtils = [
 //wok projects
 List<ProjectUtils> workProjectUtils = [
   ProjectUtils(
-    image: "assets/images/smartcv.jpeg",
+    image: "assets/images/smartcv.png",
     title: "Resume Builder App",
     subtitle:
         "Contributed to the Smart CV application on Google Play by developing UI elements and templates for CVs, cover letters, and resignation letters.",
@@ -61,7 +61,7 @@ List<ProjectUtils> workProjectUtils = [
     image: "assets/project/ringtone.png",
     title: "Ringtone App",
     subtitle:
-        "a Ringtone app that allows users to assign specific ringtones to contacts, SIM notifications, and alarms.",
+        "A Ringtone app that allows users to assign specific ringtones to contacts, SIM notifications, and alarms.",
     androidLink: "https://github.com/Mohsinkhani/Ringtone_App",
     iosLink: "https://github.com/Mohsinkhani/Ringtone_App",
   ),

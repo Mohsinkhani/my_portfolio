@@ -10,10 +10,10 @@ class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
 
   @override
-  ContactSectionState createState() => ContactSectionState();
+  _ContactSectionState createState() => _ContactSectionState();
 }
 
-class ContactSectionState extends State<ContactSection> {
+class _ContactSectionState extends State<ContactSection> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
@@ -34,7 +34,7 @@ class ContactSectionState extends State<ContactSection> {
       await launch(emailUri.toString());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not launch email client')),
+        SnackBar(content: Text('Could not launch email client')),
       );
     }
   }
@@ -42,8 +42,10 @@ class ContactSectionState extends State<ContactSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-         // color: CustomColor.bglight1,
+      decoration: BoxDecoration(
+        image: const DecorationImage(
+            image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
+        color: CustomColor.bglight1,
       ),
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
@@ -76,6 +78,7 @@ class ContactSectionState extends State<ContactSection> {
             child: CustomeTextField(
               controller: _messageController,
               hintText: "Your message",
+              labelText: "Description",
               maxLines: 10,
             ),
           ),
@@ -102,7 +105,7 @@ class ContactSectionState extends State<ContactSection> {
           ),
           ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 300),
-              child: const Divider()),
+              child: Divider()),
           const SizedBox(
             height: 15,
           ),
@@ -169,12 +172,12 @@ class ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        const SizedBox(
+        SizedBox(
           width: 15,
         ),
         Flexible(
             child: CustomeTextField(
-                controller: _emailController, hintText: "Your email")),
+                controller: _emailController, hintText: "Subject")),
       ],
     );
   }
@@ -185,12 +188,12 @@ class ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        const SizedBox(
+        SizedBox(
           height: 15,
         ),
         Flexible(
             child: CustomeTextField(
-                controller: _emailController, hintText: "Your email")),
+                controller: _emailController, hintText: "Subject")),
       ],
     );
   }
