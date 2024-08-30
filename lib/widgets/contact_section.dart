@@ -15,19 +15,19 @@ class ContactSection extends StatefulWidget {
 
 class _ContactSectionState extends State<ContactSection> {
   final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
 
   void _sendEmail() async {
     final name = _nameController.text;
-    final email = _emailController.text;
+    final subject = _subjectController.text;
     final message = _messageController.text;
 
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: 'mohsinkhan03061@gmail.com',
       query:
-          'subject=Contact Form Message&body=Name: $name\nEmail: $email\n\n$message',
+          'subject=Contact Form Message&body=Name: $name\nSubject: $subject\n\n$message',
     );
 
     if (await canLaunch(emailUri.toString())) {
@@ -43,10 +43,10 @@ class _ContactSectionState extends State<ContactSection> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: const DecorationImage(
-            image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
-        color: CustomColor.bglight1,
-      ),
+          // image: const DecorationImage(
+          //     image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
+          //  color: CustomColor.bglight1,
+          ),
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
       child: Column(
@@ -78,7 +78,6 @@ class _ContactSectionState extends State<ContactSection> {
             child: CustomeTextField(
               controller: _messageController,
               hintText: "Your message",
-              labelText: "Description",
               maxLines: 10,
             ),
           ),
@@ -97,7 +96,8 @@ class _ContactSectionState extends State<ContactSection> {
                     onPressed: _sendEmail,
                     child: const Text(
                       "Get in touch",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: "FreshMulberryDemo"),
                     ))),
           ),
           const SizedBox(
@@ -177,7 +177,7 @@ class _ContactSectionState extends State<ContactSection> {
         ),
         Flexible(
             child: CustomeTextField(
-                controller: _emailController, hintText: "Subject")),
+                controller: _subjectController, hintText: "Subject")),
       ],
     );
   }
@@ -193,7 +193,7 @@ class _ContactSectionState extends State<ContactSection> {
         ),
         Flexible(
             child: CustomeTextField(
-                controller: _emailController, hintText: "Subject")),
+                controller: _subjectController, hintText: "Subject")),
       ],
     );
   }

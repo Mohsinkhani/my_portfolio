@@ -173,7 +173,10 @@ class SkillsDesktop extends StatelessWidget {
                               horizontal: 20,
                             ),
                             leading: Image.asset(plateformItems[index]["img"]),
-                            title: Text(plateformItems[index]["title"]),
+                            title: Text(
+                              plateformItems[index]["title"],
+                              style: TextStyle(fontFamily: "FreshMulberryDemo"),
+                            ),
                           ),
                         ),
                       ),
@@ -229,7 +232,11 @@ class SkillsDesktop extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                    child: Text(skillsItem[index]["title"])),
+                                    child: Text(
+                                  skillsItem[index]["title"],
+                                  style: TextStyle(
+                                      fontFamily: "FreshMulberryDemo"),
+                                )),
                               ],
                             ),
                           ),

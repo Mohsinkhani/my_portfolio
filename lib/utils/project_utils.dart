@@ -17,7 +17,7 @@ class ProjectUtils {
 //hobby projects
 List<ProjectUtils> hobbyProjectUtils = [
   ProjectUtils(
-    image: "assets/images/meals.png",
+    image: "assets/project/meals.png",
     title: "Meals App",
     subtitle:
         "Developed a meals app offering a variety of recipes from different countries..",
@@ -25,7 +25,7 @@ List<ProjectUtils> hobbyProjectUtils = [
     iosLink: "https://github.com/Mohsinkhani/Meals-App",
   ),
   ProjectUtils(
-    image: "assets/images/tourism.png",
+    image: "assets/project/tourism.png",
     title: "Tourism App",
     subtitle:
         "Developed a tourism app with hotel booking, transport management, and curated recommendations of beautiful places based on organizational offers.",
@@ -33,7 +33,7 @@ List<ProjectUtils> hobbyProjectUtils = [
     iosLink: "https://github.com/Mohsinkhani/Tourism-App",
   ),
   ProjectUtils(
-    image: "assets/images/funding.png",
+    image: "assets/project/funding.png",
     title: "Funding app",
     subtitle:
         "Developed a funding app for a welfare foundation to help and collect donations for needy people.",
@@ -48,7 +48,7 @@ List<ProjectUtils> hobbyProjectUtils = [
 //wok projects
 List<ProjectUtils> workProjectUtils = [
   ProjectUtils(
-    image: "assets/images/smartcv.png",
+    image: "assets/project/smartcv.png",
     title: "Resume Builder App",
     subtitle:
         "Contributed to the Smart CV application on Google Play by developing UI elements and templates for CVs, cover letters, and resignation letters.",
@@ -66,7 +66,7 @@ List<ProjectUtils> workProjectUtils = [
     iosLink: "https://github.com/Mohsinkhani/Ringtone_App",
   ),
   ProjectUtils(
-    image: "assets/images/solidwastelogo.png",
+    image: "assets/project/solidwastelogo.png",
     title: "solid waste",
     subtitle:
         "Solid-waste offers live, real-time surveillance of drainage systems, ensuring instant alerts and proactive maintenance for optimal functionality. ",
@@ -92,7 +92,7 @@ List<ProjectUtils> workProjectUtils = [
         "https://github.com/Mohsinkhani/Flutter-CrudApp/tree/main/testcruds",
   ),
   ProjectUtils(
-    image: "assets/images/socialmedia.png",
+    image: "assets/project/socialmedia.png",
     title: "Social Media App",
     subtitle:
         "Created a social media app with Flutter, Dart, and Firebase featuring image uploads, friend connections, real-time chat, and Instagram-like activities for an immersive experience",

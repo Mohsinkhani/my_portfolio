@@ -51,7 +51,7 @@ class _ProjectCardWidgetState extends State<ProjectCardWidget> {
                 child: AnimatedContainer(
                   curve: Curves.fastOutSlowIn,
                   duration: const Duration(milliseconds: 1000),
-                  height: 155,
+                  height: 153,
                   width: isHovering ? 295 : 265,
                   decoration: BoxDecoration(
                       image: DecorationImage(

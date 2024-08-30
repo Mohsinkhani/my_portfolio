@@ -22,19 +22,22 @@ class CustomeTextField extends StatelessWidget {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(16),
           filled: true,
-          fillColor: CustomColor.whiteSecondary,
+          fillColor: Colors.transparent,
           focusedBorder: getInputBorder,
           enabledBorder: getInputBorder,
           border: getInputBorder,
+
           // labelText: labelText,
           // labelStyle: TextStyle(color: Colors.black ),
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey)),
+          hintStyle:
+              TextStyle(color: Colors.grey, fontFamily: "FreshMulberryDemo")),
     );
   }
 
   OutlineInputBorder get getInputBorder {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none);
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(width: 3, color: Colors.white));
   }
 }

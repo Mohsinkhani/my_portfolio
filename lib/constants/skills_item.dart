@@ -10,7 +10,7 @@ const List<Map> skillsItem = [
   {"img": "assets/images/ASP.net.png", "title": "ASP.net"},
   {"img": "assets/images/C++.png", "title": "C++"},
   {"img": "assets/images/c#.png", "title": "C#"},
-  {"img": "assets/images/html.jpg", "title": "Html"},
+  {"img": "assets/images/html.png", "title": "Html"},
   {"img": "assets/images/css.png", "title": "Css"},
   {"img": "assets/images/javascript.png", "title": "JavaScript"},
   {"img": "assets/images/docker.png", "title": "Docker"},

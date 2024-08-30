@@ -25,7 +25,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
 
   bool isSkillsVisible = false;
 
@@ -56,7 +57,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -66,8 +66,8 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color(0xffaf6480),
-          Color(0xffc3cee5),
+          Color(0xff8e0e00),
+          Color(0xff1f1c18),
         ]),
       ),
       child: LayoutBuilder(builder: (context, constraints) {
@@ -77,11 +77,11 @@ class _HomePageState extends State<HomePage> {
           endDrawer: constraints.maxWidth >= MinDesktopWidth
               ? null
               : DrawerMobile(
-            onNavItemTap: (int navIndex) {
-              scaffoldKey.currentState?.closeEndDrawer();
-              scrollToSection(navIndex);
-            },
-          ),
+                  onNavItemTap: (int navIndex) {
+                    scaffoldKey.currentState?.closeEndDrawer();
+                    scrollToSection(navIndex);
+                  },
+                ),
           body: ScrollablePositionedList.builder(
             itemCount: 6, // Ensure itemCount is correct
             itemScrollController: itemScrollController,
@@ -91,16 +91,16 @@ class _HomePageState extends State<HomePage> {
                 case 0:
                   return constraints.maxWidth >= MinDesktopWidth
                       ? HeaderDesktop(
-                    onNavMenuTap: (int navIndex) {
-                      scrollToSection(navIndex);
-                    },
-                  )
+                          onNavMenuTap: (int navIndex) {
+                            scrollToSection(navIndex);
+                          },
+                        )
                       : HeaderMobile(
-                    onLogoTap: () {},
-                    onMenuTap: () {
-                      scaffoldKey.currentState?.openEndDrawer();
-                    },
-                  );
+                          onLogoTap: () {},
+                          onMenuTap: () {
+                            scaffoldKey.currentState?.openEndDrawer();
+                          },
+                        );
                 case 1:
                   return constraints.maxWidth >= MinDesktopWidth
                       ? const MainDesktop()

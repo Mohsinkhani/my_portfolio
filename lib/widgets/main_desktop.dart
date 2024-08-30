@@ -14,7 +14,8 @@ class _MainDesktopState extends State<MainDesktop> {
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: 'mohsinkhan03061@gmail.com',
-      query: 'subject=Contact&body=Hello, I would like to get in touch with you.',
+      query:
+          'subject=Contact&body=Hello, I would like to get in touch with you.',
     );
 
     if (await canLaunch(emailUri.toString())) {
@@ -38,12 +39,13 @@ class _MainDesktopState extends State<MainDesktop> {
     final screenHeight = screenSize.height;
 
     return Container(
-      height:0.9.sh,
+      height: 0.9.sh,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       constraints: const BoxConstraints(minHeight: 350),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          bool isWideScreen = constraints.maxWidth > 900; // Adjust the width threshold as needed
+          bool isWideScreen = constraints.maxWidth >
+              900; // Adjust the width threshold as needed
           return isWideScreen ? buildRowLayout() : buildColumnLayout();
         },
       ),
@@ -77,7 +79,9 @@ class _MainDesktopState extends State<MainDesktop> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      _isHovered ? const Color.fromARGB(255, 239, 238, 236) : Colors.orange,
+                      _isHovered
+                          ? const Color.fromARGB(255, 239, 238, 236)
+                          : Colors.orange,
                     ),
                   ),
                   onPressed: _launchEmail,
@@ -88,7 +92,10 @@ class _MainDesktopState extends State<MainDesktop> {
                       color: _isHovered ? Colors.black : Colors.black,
                       fontSize: _isHovered ? 18 : 16,
                     ),
-                    child: const Text("Reach me"),
+                    child: const Text(
+                      "Reach me",
+                      style: TextStyle(fontFamily: "FreshMulberryDemo"),
+                    ),
                   ),
                 ),
               ),
@@ -137,7 +144,6 @@ class _MainDesktopState extends State<MainDesktop> {
           ),
         ),
         const SizedBox(height: 15),
-
         SizedBox(
           width: 250,
           child: AnimatedContainer(
@@ -148,7 +154,9 @@ class _MainDesktopState extends State<MainDesktop> {
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  _isHovered ? const Color.fromARGB(255, 239, 238, 236) : Colors.orange,
+                  _isHovered
+                      ? const Color.fromARGB(255, 239, 238, 236)
+                      : Colors.orange,
                 ),
               ),
               onPressed: _launchEmail,

@@ -99,7 +99,7 @@ class SkillsMobile extends StatelessWidget {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.only(left: 18),
                                   child: Image.asset(
                                     skillsItem[index]["img"],
                                     width: 40,
@@ -107,10 +107,13 @@ class SkillsMobile extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                    child: Text(
-                                  skillsItem[index]["title"],
-                                  style: TextStyle(
-                                      fontFamily: "FreshMulberryDemo"),
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Text(
+                                    skillsItem[index]["title"],
+                                    style: TextStyle(
+                                        fontFamily: "FreshMulberryDemo"),
+                                  ),
                                 )),
                               ],
                             ),
