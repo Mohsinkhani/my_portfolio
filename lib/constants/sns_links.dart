@@ -6,5 +6,5 @@ class SnsLinks {
   // static const String whatsapp = "https://www.google.com";
   static const String linkdin = "https://www.linkedin.com/in/mohsinflutter/";
   static const String Resume =
-      "https://github.com/Mohsinkhani/Resume/blob/main/Mohsin%20Khan%20CV.pdf";
+      "https://github.com/Mohsinkhani/Resume/blob/main/Mohsin%20CV.pdf";
 }
