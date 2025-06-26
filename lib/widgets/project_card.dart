@@ -1,147 +1,133 @@
-import 'dart:js' as js;
-
 import 'package:flutter/material.dart';
-import 'package:myportfolio/constants/colors.dart';
 import 'package:myportfolio/utils/project_utils.dart';
 
 class ProjectCardWidget extends StatefulWidget {
-  const ProjectCardWidget({super.key, required this.project});
-
   final ProjectUtils project;
+  final Function() onTap;
+
+  const ProjectCardWidget({
+    super.key,
+    required this.project,
+    required this.onTap,
+  });
 
   @override
   State<ProjectCardWidget> createState() => _ProjectCardWidgetState();
 }
 
 class _ProjectCardWidgetState extends State<ProjectCardWidget> {
-  bool isHovering = false;
+  bool _isHovered = false;
+  double _cardElevation = 4;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: MouseRegion(
-        onEnter: (event) {
-          setState(() {
-            isHovering = true;
-          });
-        },
-        onExit: (event) {
-          setState(() {
-            isHovering = false;
-          });
-        },
+    return MouseRegion(
+      onEnter: (_) => setState(() {
+        _isHovered = true;
+        _cardElevation = 8;
+      }),
+      onExit: (_) => setState(() {
+        _isHovered = false;
+        _cardElevation = 4;
+      }),
+      child: GestureDetector(
+        onTap: widget.onTap,
         child: AnimatedContainer(
-          curve: Curves.fastOutSlowIn,
-          duration: const Duration(milliseconds: 1000),
-          clipBehavior: Clip.antiAlias,
-          height: isHovering ? 328 : 303,
-          width: isHovering ? 303 : 270,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutQuad,
+          transform: Matrix4.identity()
+            ..translate(0.0, _isHovered ? -10.0 : 0.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(19),
-            color: Colors.black54.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: _cardElevation * 2,
+                spreadRadius: _cardElevation * 0.5,
+                offset: Offset(0, _cardElevation),
+              ),
+            ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: AnimatedContainer(
-                  curve: Curves.fastOutSlowIn,
-                  duration: const Duration(milliseconds: 1000),
-                  height: 153,
-                  width: isHovering ? 295 : 265,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            widget.project.image,
-                          ),
-                          fit: BoxFit.contain)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 15, 12, 12),
-                child: Text(
-                  widget.project.title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: CustomColor.whitePrimary,
-                      fontFamily: "FreshMulberryDemo"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                child: Text(
-                  widget.project.subtitle,
-                  maxLines: 3,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: CustomColor.whitePrimary,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              children: [
+                Hero(
+                  tag: widget.project.title,
+                  child: Image.asset(
+                    widget.project.image,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ),
-              const Spacer(),
-              // footer
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                color: CustomColor.bglight1,
-                child: Row(
-                  children: [
-                    Text(
-                      "available on",
-                      style: TextStyle(
-                          color: CustomColor.yellowSecondary, fontSize: 10),
+                
+                // Gradient Overlay
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withOpacity(0.8),
+                      ],
                     ),
-                    const Spacer(),
-                    if (widget.project.androidLink != null)
-                      InkWell(
-                        onTap: () {
-                          js.context
-                              .callMethod("open", [widget.project.androidLink]);
-                        },
-                        child: Image.asset(
-                          widget.project.androidLink!
-                                  .contains('play.google.com')
-                              ? "assets/images/playstoreicon.png"
-                              : "assets/images/github.jpg",
-                          width: 19,
+                  ),
+                ),
+
+                // Content
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        widget.project.title,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
-                    // if (widget.project.iosLink != null)
-                    //   InkWell(
-                    //     onTap: () {
-                    //       js.context
-                    //           .callMethod("open", [widget.project.iosLink]);
-                    //     },
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.only(left: 6.0),
-                    //       child: Image.asset(
-                    //         "assets/images/ios.png",
-                    //         width: 17,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // if (widget.project.weblink != null)
-                    //   InkWell(
-                    //     onTap: () {
-                    //       js.context
-                    //           .callMethod("open", [widget.project.weblink]);
-                    //     },
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.only(left: 6.0),
-                    //       child: Image.asset(
-                    //         "assets/images/web.png",
-                    //         width: 17,
-                    //       ),
-                    //     ),
-                    //   ),
-                  ],
+                      const SizedBox(height: 10),
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: _isHovered ? 1 : 0.8,
+                        child: Text(
+                          widget.project.subtitle,
+                          maxLines: _isHovered ? 3 : 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white.withOpacity(0.9),
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Row(
+                        children: [
+                          if (widget.project.androidLink != null)
+                            const Icon(Icons.android, color: Colors.white),
+                          if (widget.project.iosLink != null)
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Icon(Icons.phone_iphone, color: Colors.white),
+                            ),
+                          if (widget.project.weblink != null)
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Icon(Icons.language, color: Colors.white),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

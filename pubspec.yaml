@@ -72,6 +72,15 @@ flutter:
   assets:
     - assets/images/
     - assets/project/
+    - assets/project/exchnageapp/
+    - assets/project/hijriApp/
+    - assets/project/listenit/
+    - assets/project/grocery/
+    - assets/project/gym/
+    - assets/project/truckease/
+    - assets/project/resume/
+    - assets/project/e_commerce/
+    - assets/project/sps/
     - assets/resume.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see

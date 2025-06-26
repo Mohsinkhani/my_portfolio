@@ -6,7 +6,7 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       width: double.maxFinite,
       alignment: Alignment.center,
       child: const Text("Made by Mohsin MK with Flutter"),

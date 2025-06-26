@@ -34,7 +34,7 @@ class _ContactSectionState extends State<ContactSection> {
       await launch(emailUri.toString());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch email client')),
+        const SnackBar(content: Text('Could not launch email client')),
       );
     }
   }
@@ -42,7 +42,7 @@ class _ContactSectionState extends State<ContactSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           // image: const DecorationImage(
           //     image: AssetImage("assets/images/bg5.jpg"), fit: BoxFit.cover),
           //  color: CustomColor.bglight1,
@@ -91,7 +91,7 @@ class _ContactSectionState extends State<ContactSection> {
                 width: double.maxFinite,
                 child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                             CustomColor.yellowPrimary)),
                     onPressed: _sendEmail,
                     child: const Text(
@@ -105,7 +105,7 @@ class _ContactSectionState extends State<ContactSection> {
           ),
           ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 300),
-              child: Divider()),
+              child: const Divider()),
           const SizedBox(
             height: 15,
           ),
@@ -172,7 +172,7 @@ class _ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Flexible(
@@ -188,7 +188,7 @@ class _ContactSectionState extends State<ContactSection> {
         Flexible(
             child: CustomeTextField(
                 controller: _nameController, hintText: "Your name")),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Flexible(

@@ -8,12 +8,19 @@ class SiteLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Text("MK",
-          style: TextStyle(
-              color: CustomColor.yellowSecondary,
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              decoration: TextDecoration.underline)),
+      child: Container(
+        height: 200,
+        width: 110,
+        decoration: BoxDecoration(
+          color: CustomColor.whitePrimary.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(10),
+          image: const DecorationImage(
+            image: AssetImage("assets/images/Mklogo.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        
+        )
     );
   }
 }

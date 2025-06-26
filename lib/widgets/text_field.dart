@@ -20,7 +20,7 @@ class CustomeTextField extends StatelessWidget {
       maxLines: maxLines,
       style: TextStyle(color: CustomColor.scaffoldbgcolor),
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(16),
+          contentPadding: const EdgeInsets.all(16),
           filled: true,
           fillColor: Colors.transparent,
           focusedBorder: getInputBorder,
@@ -31,13 +31,13 @@ class CustomeTextField extends StatelessWidget {
           // labelStyle: TextStyle(color: Colors.black ),
           hintText: hintText,
           hintStyle:
-              TextStyle(color: Colors.grey, fontFamily: "FreshMulberryDemo")),
+              const TextStyle(color: Colors.grey, fontFamily: "FreshMulberryDemo")),
     );
   }
 
   OutlineInputBorder get getInputBorder {
     return OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(width: 3, color: Colors.white));
+        borderSide: const BorderSide(width: 3, color: Colors.white));
   }
 }
